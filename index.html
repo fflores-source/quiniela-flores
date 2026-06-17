@@ -401,6 +401,22 @@ const binId = '6a330badda38895dfed30752';
 let picks = {}, results = {}, entries = [], playerName = '', adminLogged = false;
 const LOCAL_KEY = 'wc26b_myname';
 
+const TEAM_FLAGS = {
+  'Chequia':'🇨🇿','Sudáfrica':'🇿🇦','México':'🇲🇽','Corea del Sur':'🇰🇷',
+  'Suiza':'🇨🇭','Bosnia-Herz.':'🇧🇦','Canadá':'🇨🇦','Catar':'🇶🇦',
+  'Escocia':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Marruecos':'🇲🇦','Brasil':'🇧🇷','Haití':'🇭🇹',
+  'EUA':'🇺🇸','Australia':'🇦🇺','Turquía':'🇹🇷','Paraguay':'🇵🇾',
+  'Alemania':'🇩🇪','Costa de Marfil':'🇨🇮','Ecuador':'🇪🇨','Curazao':'🇨🇼',
+  'Países Bajos':'🇳🇱','Suecia':'🇸🇪','Túnez':'🇹🇳','Japón':'🇯🇵',
+  'Bélgica':'🇧🇪','Irán':'🇮🇷','Nueva Zelanda':'🇳🇿','Egipto':'🇪🇬',
+  'España':'🇪🇸','Arabia Saudita':'🇸🇦','Uruguay':'🇺🇾','Cabo Verde':'🇨🇻',
+  'Francia':'🇫🇷','Irak':'🇮🇶','Noruega':'🇳🇴','Senegal':'🇸🇳',
+  'Argentina':'🇦🇷','Austria':'🇦🇹','Jordania':'🇯🇴','Argelia':'🇩🇿',
+  'Portugal':'🇵🇹','Uzbekistán':'🇺🇿','Colombia':'🇨🇴','DR Congo':'🇨🇩',
+  'Inglaterra':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Ghana':'🇬🇭','Panamá':'🇵🇦','Croacia':'🇭🇷',
+};
+function tf(name){ return (TEAM_FLAGS[name]||'🏳️')+' '; }
+
 function isLocked() { return new Date() >= LOCK_DATE; }
 
 // ===================== CLOUD =====================
@@ -514,21 +530,7 @@ function renderMatches() {
   updateProgress();
 }
 
-const TEAM_FLAGS = {
-  'Chequia':'🇨🇿','Sudáfrica':'🇿🇦','México':'🇲🇽','Corea del Sur':'🇰🇷',
-  'Suiza':'🇨🇭','Bosnia-Herz.':'🇧🇦','Canadá':'🇨🇦','Catar':'🇶🇦',
-  'Escocia':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Marruecos':'🇲🇦','Brasil':'🇧🇷','Haití':'🇭🇹',
-  'EUA':'🇺🇸','Australia':'🇦🇺','Turquía':'🇹🇷','Paraguay':'🇵🇾',
-  'Alemania':'🇩🇪','Costa de Marfil':'🇨🇮','Ecuador':'🇪🇨','Curazao':'🇨🇼',
-  'Países Bajos':'🇳🇱','Suecia':'🇸🇪','Túnez':'🇹🇳','Japón':'🇯🇵',
-  'Bélgica':'🇧🇪','Irán':'🇮🇷','Nueva Zelanda':'🇳🇿','Egipto':'🇪🇬',
-  'España':'🇪🇸','Arabia Saudita':'🇸🇦','Uruguay':'🇺🇾','Cabo Verde':'🇨🇻',
-  'Francia':'🇫🇷','Irak':'🇮🇶','Noruega':'🇳🇴','Senegal':'🇸🇳',
-  'Argentina':'🇦🇷','Austria':'🇦🇹','Jordania':'🇯🇴','Argelia':'🇩🇿',
-  'Portugal':'🇵🇹','Uzbekistán':'🇺🇿','Colombia':'🇨🇴','DR Congo':'🇨🇩',
-  'Inglaterra':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Ghana':'🇬🇭','Panamá':'🇵🇦','Croacia':'🇭🇷',
-};
-function tf(name){ return (TEAM_FLAGS[name]||'🏳️')+' '; }
+function setPick(id,val) {
   if(isLocked()) return;
   const key=String(id);
   picks[key]=picks[key]===val?undefined:val;
