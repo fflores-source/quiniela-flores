@@ -493,12 +493,12 @@ function renderMatches() {
         <div class="m-teams">
           <div class="m-local-wrap">
             <span class="m-role">LOCAL</span>
-            <span class="m-team-name">${m.local}</span>
+            <span class="m-team-name">${tf(m.local)}${m.local}</span>
           </div>
           <span class="m-vs">VS</span>
           <div class="m-visit-wrap">
             <span class="m-role">VISITANTE</span>
-            <span class="m-team-name">${m.visit}</span>
+            <span class="m-team-name">${tf(m.visit)}${m.visit}</span>
           </div>
         </div>
         <div class="m-picks">
@@ -514,7 +514,21 @@ function renderMatches() {
   updateProgress();
 }
 
-function setPick(id,val) {
+const TEAM_FLAGS = {
+  'Chequia':'🇨🇿','Sudáfrica':'🇿🇦','México':'🇲🇽','Corea del Sur':'🇰🇷',
+  'Suiza':'🇨🇭','Bosnia-Herz.':'🇧🇦','Canadá':'🇨🇦','Catar':'🇶🇦',
+  'Escocia':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Marruecos':'🇲🇦','Brasil':'🇧🇷','Haití':'🇭🇹',
+  'EUA':'🇺🇸','Australia':'🇦🇺','Turquía':'🇹🇷','Paraguay':'🇵🇾',
+  'Alemania':'🇩🇪','Costa de Marfil':'🇨🇮','Ecuador':'🇪🇨','Curazao':'🇨🇼',
+  'Países Bajos':'🇳🇱','Suecia':'🇸🇪','Túnez':'🇹🇳','Japón':'🇯🇵',
+  'Bélgica':'🇧🇪','Irán':'🇮🇷','Nueva Zelanda':'🇳🇿','Egipto':'🇪🇬',
+  'España':'🇪🇸','Arabia Saudita':'🇸🇦','Uruguay':'🇺🇾','Cabo Verde':'🇨🇻',
+  'Francia':'🇫🇷','Irak':'🇮🇶','Noruega':'🇳🇴','Senegal':'🇸🇳',
+  'Argentina':'🇦🇷','Austria':'🇦🇹','Jordania':'🇯🇴','Argelia':'🇩🇿',
+  'Portugal':'🇵🇹','Uzbekistán':'🇺🇿','Colombia':'🇨🇴','DR Congo':'🇨🇩',
+  'Inglaterra':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Ghana':'🇬🇭','Panamá':'🇵🇦','Croacia':'🇭🇷',
+};
+function tf(name){ return (TEAM_FLAGS[name]||'🏳️')+' '; }
   if(isLocked()) return;
   const key=String(id);
   picks[key]=picks[key]===val?undefined:val;
@@ -705,9 +719,9 @@ function renderAdminPanel(){
       html+=`<div class="admin-match">
         <span class="a-date">${m.date}</span>
         <span class="a-teams">
-          <span class="a-local">${m.local}</span>
+          <span class="a-local">${tf(m.local)}${m.local}</span>
           <span class="a-sep">vs</span>
-          <span class="a-visit">${m.visit}</span>
+          <span class="a-visit">${tf(m.visit)}${m.visit}</span>
         </span>
         <div class="a-btns">
           <button class="abtn L${r==='L'?' on':''}" title="Gana ${m.local}" onclick="setResult(${m.id},'L')">Local</button>
@@ -768,7 +782,7 @@ function viewEntry(name){
       const realLabel = real ? `(Real: ${PICK_LABEL[real]})` : '';
       html+=`<div class="modal-match ${rowClass}">
         <span class="modal-check">${checkIcon}</span>
-        <span class="modal-teams">${m.local} vs ${m.visit}</span>
+        <span class="modal-teams">${tf(m.local)}${m.local} vs ${tf(m.visit)}${m.visit}</span>
         <span class="modal-pick"><span class="pick-badge ${pick||'none'}">${pickLabel}</span></span>
         <span class="modal-result">${realLabel}</span>
       </div>`;
