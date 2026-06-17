@@ -402,20 +402,24 @@ let picks = {}, results = {}, entries = [], playerName = '', adminLogged = false
 const LOCAL_KEY = 'wc26b_myname';
 
 const TEAM_FLAGS = {
-  'Chequia':'🇨🇿','Sudáfrica':'🇿🇦','México':'🇲🇽','Corea del Sur':'🇰🇷',
-  'Suiza':'🇨🇭','Bosnia-Herz.':'🇧🇦','Canadá':'🇨🇦','Catar':'🇶🇦',
-  'Escocia':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Marruecos':'🇲🇦','Brasil':'🇧🇷','Haití':'🇭🇹',
-  'EUA':'🇺🇸','Australia':'🇦🇺','Turquía':'🇹🇷','Paraguay':'🇵🇾',
-  'Alemania':'🇩🇪','Costa de Marfil':'🇨🇮','Ecuador':'🇪🇨','Curazao':'🇨🇼',
-  'Países Bajos':'🇳🇱','Suecia':'🇸🇪','Túnez':'🇹🇳','Japón':'🇯🇵',
-  'Bélgica':'🇧🇪','Irán':'🇮🇷','Nueva Zelanda':'🇳🇿','Egipto':'🇪🇬',
-  'España':'🇪🇸','Arabia Saudita':'🇸🇦','Uruguay':'🇺🇾','Cabo Verde':'🇨🇻',
-  'Francia':'🇫🇷','Irak':'🇮🇶','Noruega':'🇳🇴','Senegal':'🇸🇳',
-  'Argentina':'🇦🇷','Austria':'🇦🇹','Jordania':'🇯🇴','Argelia':'🇩🇿',
-  'Portugal':'🇵🇹','Uzbekistán':'🇺🇿','Colombia':'🇨🇴','DR Congo':'🇨🇩',
-  'Inglaterra':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Ghana':'🇬🇭','Panamá':'🇵🇦','Croacia':'🇭🇷',
+  'Chequia':'cz','Sudáfrica':'za','México':'mx','Corea del Sur':'kr',
+  'Suiza':'ch','Bosnia-Herz.':'ba','Canadá':'ca','Catar':'qa',
+  'Escocia':'gb-sct','Marruecos':'ma','Brasil':'br','Haití':'ht',
+  'EUA':'us','Australia':'au','Turquía':'tr','Paraguay':'py',
+  'Alemania':'de','Costa de Marfil':'ci','Ecuador':'ec','Curazao':'cw',
+  'Países Bajos':'nl','Suecia':'se','Túnez':'tn','Japón':'jp',
+  'Bélgica':'be','Irán':'ir','Nueva Zelanda':'nz','Egipto':'eg',
+  'España':'es','Arabia Saudita':'sa','Uruguay':'uy','Cabo Verde':'cv',
+  'Francia':'fr','Irak':'iq','Noruega':'no','Senegal':'sn',
+  'Argentina':'ar','Austria':'at','Jordania':'jo','Argelia':'dz',
+  'Portugal':'pt','Uzbekistán':'uz','Colombia':'co','DR Congo':'cd',
+  'Inglaterra':'gb-eng','Ghana':'gh','Panamá':'pa','Croacia':'hr',
 };
-function tf(name){ return (TEAM_FLAGS[name]||'🏳️')+' '; }
+function tf(name){
+  const code=TEAM_FLAGS[name];
+  if(!code) return '';
+  return `<img src="https://flagcdn.com/20x15/${code}.png" width="20" height="15" style="vertical-align:middle;margin-right:4px;border-radius:2px"> `;
+}
 
 function isLocked() { return new Date() >= LOCK_DATE; }
 
